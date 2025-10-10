@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+
+/* Override Tailwind's default container padding */
+.container {
+	padding-left: 10rem;
+	padding-right: 10rem;
+}
