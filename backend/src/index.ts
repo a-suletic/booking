@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import mongoose from 'mongoose';
+import userRoutes from './routes/users';
 
 // Connect to MongoDB
 mongoose
@@ -18,9 +19,7 @@ app.use(express.json()); // Built-in body parser in Express. Covert the body of 
 app.use(express.urlencoded({ extended: true })); // To parse URL-encoded data
 app.use(cors());
 
-app.get('/api/test', async (req: Request, res: Response) => {
-	res.json({ message: 'Hello, from express endpoint!' });
-});
+app.use('/api/users', userRoutes); // if request URL starts with /api/users, forward it to userRoutes
 
 const PORT = process.env.PORT || 5000;
 
