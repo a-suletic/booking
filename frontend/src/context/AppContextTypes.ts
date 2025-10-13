@@ -7,6 +7,7 @@ export type ToastMessage = {
 
 export type AppContextType = {
   showToast: (toastMessage: ToastMessage) => void;
+  isLoggedIn: boolean;
 };
 
 export const AppContext = React.createContext<AppContextType | undefined>(
