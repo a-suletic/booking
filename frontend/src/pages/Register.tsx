@@ -27,7 +27,7 @@ const Register = () => {
   const mutation = useMutation({
     mutationFn: apiClient.register,
     onSuccess: async () => {
-      showToast({ message: 'Registration successful', type: 'SUCCESS' });
+      showToast({ message: 'Registration Success!', type: 'SUCCESS' });
       await queryClient.invalidateQueries({ queryKey: ['validateToken'] }); // Re-run validateToken query to update isLoggedIn state
       navigate('/');
     },
