@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import userRoutes from './routes/users';
 import authRoutes from './routes/auth';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING as string)
@@ -26,6 +27,10 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+// build frontend app and dist folder will be created
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 
 app.use('/api/users', userRoutes); // if request URL starts with /api/users, forward it to userRoutes
 app.use('/api/auth', authRoutes);
