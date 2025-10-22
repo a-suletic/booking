@@ -45,6 +45,12 @@ app.use('/api/users', userRoutes); // if request URL starts with /api/users, for
 app.use('/api/auth', authRoutes);
 app.use('/api/my-hotels', myHotelRoutes);
 
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '../../frontend/dist', 'index.html'));
+});
+
 const PORT = process.env.PORT || 7000;
 
 app.listen(PORT, () => {
