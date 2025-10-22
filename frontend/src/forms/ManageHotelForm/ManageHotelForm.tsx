@@ -5,7 +5,7 @@ import TypeSection from './TypeSection';
 import FacilitiesSection from './FacilitiesSection';
 import GuestsSection from './GuestsSection';
 import ImagesSection from './ImageSection';
-import type { HotelType } from '../../../../backend/src/models/Hotel';
+import type { HotelType } from '../../types/hotel';
 
 export type HotelFormData = {
   name: string;

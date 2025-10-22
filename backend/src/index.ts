@@ -37,18 +37,20 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// build frontend app and dist folder will be created
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../../frontend/dist')));
-
+// API routes MUST come before static file serving and wildcard routes
 app.use('/api/users', userRoutes); // if request URL starts with /api/users, forward it to userRoutes
 app.use('/api/auth', authRoutes);
 app.use('/api/my-hotels', myHotelRoutes);
 
+// build frontend app and dist folder will be created
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-app.get('*', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, '../../frontend/dist', 'index.html'));
+// This MUST be the last middleware
+app.use((req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
 });
 
 const PORT = process.env.PORT || 7000;
