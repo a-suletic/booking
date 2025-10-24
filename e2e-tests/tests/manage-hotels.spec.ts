@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test';
-import path from 'path';
 
 const UI_URL = 'http://localhost:5173/';
 
@@ -40,8 +39,8 @@ test('should allow user to add a hotel', async ({ page }) => {
   await page.locator('[name="childCount"]').fill('4');
 
   await page.setInputFiles('[name="imageFiles"]', [
-    path.join(__dirname, 'files', '1.png'),
-    path.join(__dirname, 'files', '2.png'),
+    'e2e-tests/tests/files/1.png',
+    'e2e-tests/tests/files/2.png',
   ]);
 
   await page.getByRole('button', { name: 'Save' }).click();
