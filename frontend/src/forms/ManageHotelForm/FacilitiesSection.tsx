@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import { hotelFacilities } from '../../config/hotel-options-config';
-import type { HotelFormData } from './ManageHotelForm';
+import type { HotelFormData } from '../../types/hotel';
 
 const FacilitiesSection = () => {
   const {
@@ -13,7 +13,7 @@ const FacilitiesSection = () => {
       <h2 className="text-2xl font-bold mb-3">Facilities</h2>
       <div className="grid grid-cols-5 gap-3">
         {hotelFacilities.map(facility => (
-          <label className="text-sm flex gap-1 text-gray-700">
+          <label key={facility} className="text-sm flex gap-1 text-gray-700">
             <input
               type="checkbox"
               value={facility}

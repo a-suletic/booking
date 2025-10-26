@@ -5,22 +5,7 @@ import TypeSection from './TypeSection';
 import FacilitiesSection from './FacilitiesSection';
 import GuestsSection from './GuestsSection';
 import ImagesSection from './ImageSection';
-import type { HotelType } from '../../types/hotel';
-
-export type HotelFormData = {
-  name: string;
-  city: string;
-  country: string;
-  description: string;
-  type: string;
-  pricePerNight: number;
-  starRating: number;
-  facilities: string[];
-  imageFiles: FileList;
-  imageUrls: string[];
-  adultCount: number;
-  childCount: number;
-};
+import type { HotelFormData, HotelType } from '../../types/hotel';
 
 type Props = {
   hotel?: HotelType;

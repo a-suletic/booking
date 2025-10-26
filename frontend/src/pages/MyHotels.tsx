@@ -33,6 +33,7 @@ const MyHotels = () => {
         {hotelData.map(hotel => (
           <div
             data-testid="hotel-card"
+            key={hotel._id}
             className="flex flex-col justify-between border border-slate-300 rounded-lg p-8 gap-5"
           >
             <h2 className="text-2xl font-bold">{hotel.name}</h2>
