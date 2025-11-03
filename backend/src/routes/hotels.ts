@@ -102,6 +102,8 @@ const constructSearchQuery = (queryParams: any) => {
     };
   }
 
+  console.log('Constructed Query:', constructedQuery);
+
   return constructedQuery;
 };
 
