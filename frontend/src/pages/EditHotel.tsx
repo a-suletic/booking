@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import * as apiClient from '../api-client';
 import ManageHotelForm from '../forms/ManageHotelForm/ManageHotelForm';
-import { useAppContext } from '../context/useAppContext';
+import { useAppContext } from '../context/AppContext/useAppContext';
 
 const EditHotel = () => {
   const { hotelId } = useParams();

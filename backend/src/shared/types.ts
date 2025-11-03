@@ -22,3 +22,12 @@ export type UserType = {
   firstName: string;
   lastName: string;
 };
+
+export type HotelSearchResponse = {
+  data: HotelType[];
+  pagination: {
+    total: number;
+    page: number;
+    pages: number;
+  };
+};

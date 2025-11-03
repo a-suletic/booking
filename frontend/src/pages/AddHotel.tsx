@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { useAppContext } from '../context/useAppContext';
+import { useAppContext } from '../context/AppContext/useAppContext';
 import * as apiClient from '../api-client';
 import ManageHotelForm from '../forms/ManageHotelForm/ManageHotelForm';
 

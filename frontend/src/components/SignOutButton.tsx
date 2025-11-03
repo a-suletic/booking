@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import * as apiClient from '../api-client';
-import { useAppContext } from '../context/useAppContext';
+import { useAppContext } from '../context/AppContext/useAppContext';
 
 const SignOutButton = () => {
   const queryClient = useQueryClient();
