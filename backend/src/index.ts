@@ -9,6 +9,7 @@ import path from 'path';
 import { v2 as cloudinary } from 'cloudinary';
 import myHotelRoutes from './routes/my-hotels';
 import hotelRoutes from './routes/hotels';
+import myBookingRoutes from './routes/my-bookings';
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -43,6 +44,7 @@ app.use('/api/users', userRoutes); // if request URL starts with /api/users, for
 app.use('/api/auth', authRoutes);
 app.use('/api/my-hotels', myHotelRoutes);
 app.use('/api/hotels', hotelRoutes);
+app.use('/api/my-bookings', myBookingRoutes);
 
 // build frontend app and dist folder will be created
 // Serve static files from the React app
