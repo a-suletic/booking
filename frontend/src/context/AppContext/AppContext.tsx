@@ -4,6 +4,11 @@ import type { ToastMessage } from './AppContextTypes';
 import Toast from '../../components/Toast';
 import { useQuery } from '@tanstack/react-query';
 import * as apiCLient from '../../api-client';
+import { loadStripe, type Stripe } from '@stripe/stripe-js';
+
+const STRIPE_PUB_KEY = import.meta.env.VITE_STRIPE_PUB_KEY || '';
+
+const stripePromise: Promise<Stripe | null> = loadStripe(STRIPE_PUB_KEY);
 
 export const AppContextProvider = ({
   children,
@@ -25,6 +30,7 @@ export const AppContextProvider = ({
           setToast(toastMessage);
         },
         isLoggedIn: !isError,
+        stripePromise,
       }}
     >
       {toast && (

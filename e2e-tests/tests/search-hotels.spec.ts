@@ -39,34 +39,51 @@ test('should show hotel detail', async ({ page }) => {
   await expect(page.getByRole('button', { name: 'Book now' })).toBeVisible();
 });
 
-// test('should book hotel', async ({ page }) => {
-//   await page.goto(UI_URL);
+test('should book hotel', async ({ page }) => {
+  await page.goto(UI_URL);
 
-//   await page.getByPlaceholder('Where are you going?').fill('Singapore');
+  await page.getByPlaceholder('Where are you going?').fill('Singapore');
 
-//   const date = new Date();
-//   date.setDate(date.getDate() + 3);
-//   const formattedDate = date.toISOString().split('T')[0];
-//   await page.getByPlaceholder('Check-out Date').fill(formattedDate);
+  const date = new Date();
+  date.setDate(date.getDate() + 3);
+  // const formattedDate = date.toISOString().split('T')[0];
 
-//   await page.getByRole('button', { name: 'Search' }).click();
+  // Alternative formatting if needed:
+  const formattedDate = `${(date.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}/${date
+    .getDate()
+    .toString()
+    .padStart(2, '0')}/${date.getFullYear()}`;
 
-//   await page.getByText('Dublin Getaways').click();
-//   await page.getByRole('button', { name: 'Book now' }).click();
+  // Clear and type into the DatePicker using the calculated date
+  const checkOutPicker = page.getByPlaceholder('Check-out Date');
+  await checkOutPicker.click();
+  await checkOutPicker.selectText();
+  await checkOutPicker.type(formattedDate);
+  await checkOutPicker.press('Tab');
 
-//   await expect(page.getByText('Total Cost: £357.00')).toBeVisible();
+  await page.getByRole('button', { name: 'Search' }).click();
 
-//   const stripeFrame = page.frameLocator('iframe').first();
-//   await stripeFrame
-//     .locator('[placeholder="Card number"]')
-//     .fill('4242424242424242');
-//   await stripeFrame.locator('[placeholder="MM / YY"]').fill('04/30');
-//   await stripeFrame.locator('[placeholder="CVC"]').fill('242');
-//   await stripeFrame.locator('[placeholder="ZIP"]').fill('24225');
+  await page.getByText('InterContinental').click();
+  await page.getByRole('button', { name: 'Book now' }).click();
 
-//   await page.getByRole('button', { name: 'Confirm Booking' }).click();
-//   await expect(page.getByText('Booking Saved!')).toBeVisible();
+  // Wait 5 seconds for the page to process the date change
+  await page.waitForTimeout(5000);
 
-//   await page.getByRole('link', { name: 'My Bookings' }).click();
-//   await expect(page.getByText('Dublin Getaways')).toBeVisible();
-// });
+  await expect(page.getByText('Total Cost: £600.00')).toBeVisible();
+
+  const stripeFrame = page.frameLocator('iframe').first();
+  await stripeFrame
+    .locator('[placeholder="Card number"]')
+    .fill('4242424242424242');
+  await stripeFrame.locator('[placeholder="MM / YY"]').fill('04/30');
+  await stripeFrame.locator('[placeholder="CVC"]').fill('242');
+  await stripeFrame.locator('[placeholder="ZIP"]').fill('24225');
+
+  await page.getByRole('button', { name: 'Confirm Booking' }).click();
+  await expect(page.getByText('Booking Saved!')).toBeVisible();
+
+  // await page.getByRole('link', { name: 'My Bookings' }).click();
+  // await expect(page.getByText('InterContinental')).toBeVisible();
+});

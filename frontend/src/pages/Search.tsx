@@ -116,7 +116,9 @@ const Search = () => {
           </select>
         </div>
         {hotelData?.data.map(hotel => (
-          <SearchResultsCard hotel={hotel} />
+          <div key={crypto.randomUUID()}>
+            <SearchResultsCard hotel={hotel} />
+          </div>
         ))}
         <div>
           <Pagination

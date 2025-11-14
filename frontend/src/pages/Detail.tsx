@@ -23,7 +23,7 @@ const Detail = () => {
       <div>
         <span className="flex">
           {Array.from({ length: hotel.starRating }).map(() => (
-            <AiFillStar className="fill-yellow-400" />
+            <AiFillStar className="fill-yellow-400" key={crypto.randomUUID()} />
           ))}
         </span>
         <h1 className="text-3xl font-bold">{hotel.name}</h1>
@@ -31,7 +31,7 @@ const Detail = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {hotel.imageUrls.map(image => (
-          <div className="h-[300px]">
+          <div className="h-[300px]" key={crypto.randomUUID()}>
             <img
               src={image}
               alt={hotel.name}
@@ -43,7 +43,10 @@ const Detail = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
         {hotel.facilities.map(facility => (
-          <div className="border border-slate-300 rounded-sm p-3">
+          <div
+            className="border border-slate-300 rounded-sm p-3"
+            key={crypto.randomUUID()}
+          >
             {facility}
           </div>
         ))}

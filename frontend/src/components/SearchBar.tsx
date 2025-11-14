@@ -17,6 +17,7 @@ const SearchBar = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
     search.saveSearchValues(
       destination,
       adultCount,
@@ -24,6 +25,37 @@ const SearchBar = () => {
       checkIn,
       checkOut
     );
+
+    navigate('/search');
+  };
+
+  const isDefaultState = () => {
+    const today = new Date();
+    return (
+      destination === '' &&
+      adultCount === 1 &&
+      childCount === 0 &&
+      checkIn.toDateString() === today.toDateString() &&
+      checkOut.toDateString() === today.toDateString()
+    );
+  };
+
+  const handleClear = (e: FormEvent) => {
+    e.preventDefault();
+
+    // If already in default state, don't do anything
+    if (isDefaultState()) {
+      return;
+    }
+
+    setDestination('');
+    setAdultCount(1);
+    setChildCount(0);
+    setCheckIn(new Date());
+    setCheckOut(new Date());
+
+    search.saveSearchValues('', 1, 0, new Date(), new Date());
+
     navigate('/search');
   };
 
@@ -102,7 +134,15 @@ const SearchBar = () => {
         <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500">
           Search
         </button>
-        <button className="w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500">
+        <button
+          onClick={e => handleClear(e)}
+          disabled={isDefaultState()}
+          className={`w-1/3 text-white h-full p-2 font-bold text-xl ${
+            isDefaultState()
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-red-600 hover:bg-red-500'
+          }`}
+        >
           Clear
         </button>
       </div>
