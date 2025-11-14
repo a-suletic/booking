@@ -46,9 +46,7 @@ test('should book hotel', async ({ page }) => {
 
   const date = new Date();
   date.setDate(date.getDate() + 3);
-  // const formattedDate = date.toISOString().split('T')[0];
 
-  // Alternative formatting if needed:
   const formattedDate = `${(date.getMonth() + 1)
     .toString()
     .padStart(2, '0')}/${date
